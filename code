@@ -1,0 +1,382 @@
+import pygame
+import time
+
+pygame.init()
+screen = pygame.display.set_mode((300, 400))
+screen.fill((0,0,0))
+done = False
+finish_turn = False
+
+player1_score =0
+player2_score = 0
+
+class cube:
+    def __init__(self,posx ,posy,value,color):
+        self.posx = posx
+        self.posy =posy
+        self.value = value
+        self.color = color
+
+
+    def cube_draw(self):
+        pygame.draw.rect(screen,self.color,(self.posx,self.posy,96,95))
+
+    def set_color(self, color1):
+        self.color = color1
+
+    def get_color(self):
+        return self.color
+black = (0,0,0)
+white = (255,255,255)
+red = (255,0,0)
+green = (0,255,0)
+color_value = white
+
+class player:
+    def __init__(self, color):
+        self.color = color
+        self.score =0
+
+
+player1 = player(red)
+player2 = player(green)
+def board():
+    cube1 = cube(0,0,0,color_value)
+    cube1.cube_draw()
+    cube2 = cube(100, 0, 0,color_value)
+    cube2.cube_draw()
+    cube3 = cube(200, 0, 0,color_value)
+    cube3.cube_draw()
+    cube4 = cube(0, 100, 0,color_value)
+    cube4.cube_draw()
+    cube5 = cube(100, 100, 0,color_value)
+    cube5.cube_draw()
+    cube6 = cube(200, 100, 0,color_value)
+    cube6.cube_draw()
+    cube7 = cube(0, 200, 0,color_value)
+    cube7.cube_draw()
+    cube8 = cube(100, 200, 0,color_value)
+    cube8.cube_draw()
+    cube9 = cube(200, 200, 0,color_value)
+    cube9.cube_draw()
+    cube_lst = ["",cube1,cube2,cube3,cube4,cube5,cube6,cube7,cube8,cube9]
+    return  cube_lst
+
+
+
+def reset_board():
+    print("reset")
+    for i in range(9):
+        cubelst[i+1].color =color_value
+        cubelst[i+1].cube_draw()
+
+    pygame.display.flip()
+
+
+
+
+def check_click(player_value):
+    global player_turn
+    if pygame.mouse.get_pressed()[0]:
+        time.sleep(0.1)
+        x, y = pygame.mouse.get_pos()
+        # cube1
+        if x < 100 and x > 1 and y > 0 and y < 100 and pygame.mouse.get_pressed()[0] and cubelst[1].color == color_value:
+            cubelst[1].color = player_value
+            cubelst[1].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+
+        # cube2
+        elif x < 200 and x > 100 and y > 0 and y < 100 and pygame.mouse.get_pressed()[0] and cubelst[2].color == color_value:
+
+            cubelst[2].color = player_value
+            cubelst[2].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+        # cube3
+        elif x < 300 and x > 200 and y > 0 and y < 100 and pygame.mouse.get_pressed()[0] and cubelst[3].color == color_value:
+
+            cubelst[3].color = player_value
+            cubelst[3].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+        # cube4
+        elif x < 100 and x > 0 and y > 100 and y < 200 and pygame.mouse.get_pressed()[0] and cubelst[4].color == color_value:
+
+            cubelst[4].color = player_value
+            cubelst[4].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+        # cube5
+        elif x < 200 and x > 100 and y > 100 and y < 200 and pygame.mouse.get_pressed()[0] and cubelst[5].color == color_value:
+
+            cubelst[5].color = player_value
+            cubelst[5].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+        # cube6
+        elif x < 300 and x > 200 and y > 100 and y < 200 and pygame.mouse.get_pressed()[0]  and cubelst[6].color == color_value:
+
+            cubelst[6].color = player_value
+            cubelst[6].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+        # cube7
+        elif x < 100 and x > 0 and y > 200 and y < 300 and pygame.mouse.get_pressed()[0]  and cubelst[7].color == color_value:
+
+            cubelst[7].color = player_value
+            cubelst[7].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+            # cube8
+        elif x < 200 and x > 100 and y > 200 and y < 300 and pygame.mouse.get_pressed()[0]  and cubelst[8].color == color_value:
+
+            cubelst[8].color = player_value
+            cubelst[8].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+            # cube9
+        elif x < 300 and x > 200 and y > 200 and y < 300 and pygame.mouse.get_pressed()[0] and cubelst[9].color == color_value:
+
+            cubelst[9].color = player_value
+            cubelst[9].cube_draw()
+            if player_turn == True:
+                player_turn = False
+            else:
+                player_turn = True
+            return True
+
+
+
+def in_arow ():
+    if cubelst[1].color == cubelst[2].color == cubelst[3].color != color_value:
+        if cubelst[1].color == red:
+            red_won()
+        else:
+            green_won()
+    if cubelst[4].color == cubelst[5].color == cubelst[6].color != color_value:
+        if cubelst[4].color == red:
+            red_won()
+        else:
+            green_won()
+    if cubelst[7].color == cubelst[8].color == cubelst[9].color != color_value:
+        if cubelst[7].color == red:
+            red_won()
+        else:
+            green_won()
+    return False
+
+
+def in_line ():
+
+    if cubelst[1].color == cubelst[4].color == cubelst[7].color != color_value:
+        if cubelst[1].color == red:
+            red_won()
+        else:
+            green_won()
+    if cubelst[2].color == cubelst[5].color == cubelst[8].color != color_value:
+        if cubelst[2].color == red:
+            red_won()
+        else:
+            green_won()
+    if cubelst[3].color == cubelst[6].color == cubelst[9].color != color_value:
+        if cubelst[3].color == red:
+            red_won()
+        else:
+            green_won()
+    return False
+def in_diagonal ():
+
+    if cubelst[1].color == cubelst[5].color == cubelst[9].color != color_value:
+        if cubelst[1].color == red:
+            red_won()
+        else:
+            green_won()
+    if cubelst[3].color == cubelst[5].color == cubelst[7].color != color_value:
+        if cubelst[3].color == red:
+            red_won()
+        else:
+            green_won()
+    return False
+
+def tie():
+    full = True
+    for i in range (9):
+        if cubelst[i+1].color == color_value:
+            full = False
+    if full == True:
+        pygame.draw.rect(screen, black, (0, 300, 300, 100))
+        pygame.display.flip()
+        font = pygame.font.Font('freesansbold.ttf', 20)
+        text1 = font.render("its a tie!, restarting board...", True, white, black)
+        textRect = text1.get_rect()
+        textRect.center = (150, 350)
+        screen.blit(text1, textRect)
+        pygame.display.flip()
+        time.sleep(1)
+        reset_board()
+        pygame.draw.rect(screen, black, (0, 300, 300, 100))
+
+
+
+def red_won():
+    player1.score += 1
+    pygame.draw.rect(screen,black ,(0, 300, 300, 100))
+    pygame.display.flip()
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render("red won, restarting board...", True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text1, textRect)
+    pygame.display.flip()
+    time.sleep(1)
+    pygame.draw.rect(screen, black, (0, 300, 300, 100))
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render((f'player1 =  {player1.score}  ||  player2=  {player2.score}'), True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text1, textRect)
+    pygame.display.flip()
+    time.sleep(1)
+    pygame.draw.rect(screen, black, (0, 300, 300, 100))
+    reset_board()
+
+
+def green_won():
+    player2.score +=1
+    pygame.draw.rect(screen,black ,(0, 300, 300, 100))
+    pygame.display.flip()
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render(" green won , restarting board...", True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text1, textRect)
+    pygame.display.flip()
+    time.sleep(1)
+    pygame.draw.rect(screen, black, (0, 300, 300, 100))
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render((f'player1 =  {player1.score}  ||  player2=  {player2.score}'), True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text1, textRect)
+    pygame.display.flip()
+    time.sleep(1)
+    pygame.draw.rect(screen, black, (0, 300, 300, 100))
+    reset_board()
+
+
+
+def player1_turn():
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text = font.render("player1 turn", True, white, black)
+    textRect = text.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text, textRect)
+
+
+def player2_turn():
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render("player2 turn", True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 350)
+    screen.blit(text1, textRect)
+def restart():
+    pygame.draw.rect(screen, black, (0, 0, 300, 400))
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text1 = font.render(" restarting board...", True, white, black)
+    textRect = text1.get_rect()
+    textRect.center = (150, 200)
+    screen.blit(text1, textRect)
+    pygame.display.flip()
+    player1.score = 0
+    player2.score = 0
+    pygame.draw.rect(screen, black, (0, 0, 300, 400))
+    time.sleep(1)
+    
+    reset_board()
+    player_turn = True
+    return player_turn
+
+
+
+
+player_turn = True
+
+def main():
+    done =  False
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+                done = True
+            if event.type == pygame.KEYDOWN:
+                restart()
+
+
+
+        if player_turn == True:
+            player1_turn()
+            pygame.display.flip()
+            if check_click(red):
+                pygame.display.flip()
+                time.sleep(0.5)
+                in_arow()
+                in_line()
+                in_diagonal()
+                tie()
+                break
+
+
+        if player_turn == False:
+            player2_turn()
+            pygame.display.flip()
+            if check_click(green):
+               pygame.display.flip()
+               in_arow()
+               in_line()
+               in_diagonal()
+               tie()
+               time.sleep(0.5)
+
+
+
+def game():
+    while True:
+        main()
+
+
+
+cubelst = board()
+game()
+
+
+
+
+
+
